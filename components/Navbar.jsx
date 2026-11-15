@@ -76,29 +76,35 @@ export default function Navbar() {
       />
 
       <motion.header
-        className="fixed inset-x-0 top-0 z-50"
+        className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 py-3 sm:px-6 lg:px-8 transition-all duration-300 pointer-events-none"
         initial={{ y: -72, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: entranceDelay, duration: 0.6, ease: 'easeOut' }}
       >
         <div
-          className={`flex h-[72px] w-full items-center justify-between px-6 transition-all duration-300 sm:px-8 lg:px-16 ${
-            scrolled ? 'bg-background/85 backdrop-blur-md' : 'bg-transparent'
+          className={`pointer-events-auto flex h-14 w-full max-w-7xl items-center justify-between px-5 transition-all duration-300 sm:px-6 ${
+            scrolled
+              ? 'rounded-full bg-surface/85 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/40'
+              : 'rounded-full bg-transparent border border-transparent'
           }`}
         >
           {/* Logo / name mark → home */}
           <Link
             href="/"
             aria-label={`${site.name} — home`}
-            className="flex items-center font-display text-xl text-text"
+            className="group flex items-center gap-2.5 font-display text-lg tracking-tight text-text"
           >
-            {site.shortName}
-            <span className="text-accent">_</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/15 border border-accent/30 font-mono text-xs font-bold text-accent transition-transform duration-300 group-hover:scale-105 group-hover:border-accent">
+              KW
+            </span>
+            <span className="font-semibold transition-colors group-hover:text-accent">
+              {site.name}
+            </span>
           </Link>
 
-          {/* Desktop links — developer-coded "//" style, neon prefixes */}
+          {/* Desktop links */}
           {isDesktop ? (
-            <nav className="flex items-center gap-7" aria-label="Main">
+            <nav className="flex items-center gap-6" aria-label="Main">
               {navRoutes.map((s) => {
                 const active = isActive(pathname, s.path)
                 return (
@@ -106,31 +112,43 @@ export default function Navbar() {
                     key={s.path}
                     href={s.path}
                     aria-current={active ? 'page' : undefined}
-                    className="group font-mono text-sm"
+                    className="group relative font-mono text-xs uppercase tracking-wider"
                   >
                     <span
-                      className={
+                      className={`transition-colors duration-200 ${
                         active
-                          ? 'text-text'
-                          : 'text-muted transition-colors group-hover:text-text'
-                      }
+                          ? 'text-accent font-semibold'
+                          : 'text-muted hover:text-text'
+                      }`}
                     >
-                      <span className="text-accent">// </span>
+                      <span className="text-accent/60">// </span>
                       {s.label}
                     </span>
+                    {active && (
+                      <motion.span
+                        layoutId="activeNavIndicator"
+                        className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-accent"
+                      />
+                    )}
                   </Link>
                 )
               })}
 
-              {/* Outlined CTA — accent border + text, never a bg fill */}
+              {/* Status pill */}
+              <div className="hidden xl:flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 font-mono text-[11px] text-accent">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                Available for work
+              </div>
+
+              {/* CTA */}
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   href="/contact"
-                  className="group flex items-center gap-1.5 border border-accent px-5 py-2 font-mono text-sm text-accent transition-colors hover:bg-accent hover:text-background"
+                  className="group flex items-center gap-1.5 rounded-full bg-accent/15 hover:bg-accent border border-accent/40 hover:border-accent px-4 py-1.5 font-mono text-xs font-semibold text-accent hover:text-background transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.35)]"
                 >
                   hire me
                   <ArrowUpRight
-                    size={15}
+                    size={14}
                     className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   />
                 </Link>
@@ -141,9 +159,9 @@ export default function Navbar() {
               onClick={() => setOpen((o) => !o)}
               aria-label="Toggle menu"
               aria-expanded={open}
-              className="rounded-md p-2.5 text-text transition-colors hover:bg-surface"
+              className="rounded-full p-2 text-text transition-colors hover:bg-surface border border-white/5"
             >
-              {open ? <X size={22} /> : <Menu size={22} />}
+              {open ? <X size={20} /> : <Menu size={20} />}
             </button>
           )}
         </div>
@@ -153,11 +171,11 @@ export default function Navbar() {
           {open && !isDesktop && (
             <motion.nav
               ref={menuRef}
-              className="w-full border-t border-surface-light bg-background/95 backdrop-blur-md"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="pointer-events-auto absolute left-4 right-4 top-16 overflow-hidden rounded-2xl border border-white/10 bg-surface/95 p-4 shadow-2xl backdrop-blur-2xl"
+              initial={{ opacity: 0, y: -10, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.96 }}
+              transition={{ duration: 0.2 }}
               aria-label="Mobile menu"
             >
               <div className="flex flex-col gap-1 px-4 py-3">

@@ -51,8 +51,10 @@ export default function ProjectCard({ project, detailed = false }) {
         </span>
       </div>
 
-      {/* Body */}
-      <div className="flex w-full flex-col gap-5 border-t border-surface-light pt-6 md:flex-row md:items-start md:justify-between md:gap-8">
+      {/* Body — always stacked. The home preview sits in a three-up
+          grid, so a side-by-side row would squeeze the title and push
+          the tech chips past the viewport edge. */}
+      <div className="flex w-full flex-col gap-5 border-t border-surface-light pt-6">
         <div className="max-w-xl min-w-0">
           <p className="mb-1 font-mono text-xs text-accent">{project.blurb}</p>
           <h3 className="font-display text-3xl leading-tight text-text transition-colors group-hover:text-accent sm:text-4xl">
@@ -99,7 +101,7 @@ export default function ProjectCard({ project, detailed = false }) {
           )}
         </div>
 
-        <div className="flex shrink-0 flex-col items-start gap-6">
+        <div className="flex w-full flex-col items-start gap-6">
           <div className="flex flex-wrap gap-2">
             {project.tech.map((t) => {
               const Icon = techIcons[t]

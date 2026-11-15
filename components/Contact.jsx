@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mail, ArrowUpRight, Loader2, Send, CheckCircle2 } from 'lucide-react'
+import { Mail, ArrowUpRight, Loader2, Send, CheckCircle2, Download } from 'lucide-react'
 import site from '../data/site'
 
 const initialForm = { name: '', email: '', message: '' }
@@ -121,6 +121,15 @@ export default function Contact() {
               Have a role to fill or an idea to build? My inbox is always open —
               I&apos;ll get back to you as soon as I can.
             </p>
+
+            <a
+              href={site.cv}
+              download="Khaled-Waleed-CV.pdf"
+              className="mt-6 inline-flex items-center gap-2 border border-surface-light px-5 py-3 font-mono text-sm text-text transition-colors hover:border-accent hover:text-accent"
+            >
+              <Download size={16} className="text-accent" />
+              download cv
+            </a>
           </div>
 
           {/* Form */}

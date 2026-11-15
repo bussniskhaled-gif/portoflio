@@ -66,23 +66,23 @@ export default function CustomCursor() {
     <>
       {/* Leading dot */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[200] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
+        className="pointer-events-none fixed left-0 top-0 z-[200] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
         style={{ x: dotX, y: dotY, opacity: visible ? 1 : 0 }}
         transition={{ opacity: { duration: 0.2 } }}
       />
-      {/* Trailing ring */}
+      {/* Trailing ring with ambient glow */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[199] -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/70"
+        className="pointer-events-none fixed left-0 top-0 z-[199] -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
         style={{ x: ringX, y: ringY, opacity: visible ? 1 : 0 }}
         animate={{
-          width: hovering ? 56 : 32,
-          height: hovering ? 56 : 32,
-          borderColor: hovering ? 'rgba(57,255,20,0.9)' : 'rgba(57,255,20,0.5)',
+          width: hovering ? 52 : 28,
+          height: hovering ? 52 : 28,
+          borderColor: hovering ? 'rgba(16,185,129,0.9)' : 'rgba(16,185,129,0.4)',
           backgroundColor: hovering
-            ? 'rgba(57,255,20,0.08)'
-            : 'rgba(57,255,20,0)',
+            ? 'rgba(16,185,129,0.1)'
+            : 'rgba(16,185,129,0)',
         }}
-        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       />
     </>
   )

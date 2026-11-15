@@ -19,6 +19,10 @@ const site = {
     'I build complete web products, from the PostgreSQL database and Node.js API to the Next.js interface — one developer, one codebase, shipped end to end.',
   roles: ['Full Stack Developer', 'Node.js Developer', 'Next.js Developer'],
 
+  // Public résumé — served straight from /public so any visitor can
+  // download it without signing in.
+  cv: '/cv/Khaled-Waleed-CV.pdf',
+
   // Substitution speed (ms) used by the Hero typing effect.
   typingSpeed: 80,
   typingPause: 1600,

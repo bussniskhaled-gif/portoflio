@@ -10,7 +10,7 @@ export default function Loader({ onComplete }) {
   const letters = site.shortName.split('')
 
   useEffect(() => {
-    const t = setTimeout(onComplete, 1300)
+    const t = setTimeout(onComplete, 650)
     return () => clearTimeout(t)
   }, [onComplete])
 

@@ -3,13 +3,11 @@
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowDown } from 'lucide-react'
+import { ArrowRight, ArrowDown, Download } from 'lucide-react'
 import site from '../data/site'
 import HeroIllustrations from './HeroIllustrations'
 import { useEntranceDelay } from '../hooks/useEntranceDelay'
 
-// Cycles through job titles with a typewriter effect. When motion is
-// reduced, skip the timers entirely and show the first role as-is.
 function useTypewriter(words, typeSpeed, pause, enabled) {
   const [text, setText] = useState('')
   const [wordIndex, setWordIndex] = useState(0)
@@ -44,24 +42,19 @@ function useTypewriter(words, typeSpeed, pause, enabled) {
   return enabled ? text : words[0]
 }
 
-// Home page only scrolls as far as the proof strip beneath the fold.
-// Everything else is a route now.
 function scrollToNext() {
   const el = document.getElementById('proof')
   if (!el) return
-  const top = el.getBoundingClientRect().top + window.scrollY - 72
+  const top = el.getBoundingClientRect().top + window.scrollY - 80
   window.scrollTo({ top, behavior: 'smooth' })
 }
 
 const item = {
-  hidden: { y: 40, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.7, ease: 'easeOut' } },
+  hidden: { y: 28, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
 }
 
 export default function Hero() {
-  // Read the OS preference after mount only. A render-time read would
-  // make the client output differ from the server HTML (hydration
-  // mismatch), so the first pass always behaves as "motion allowed".
   const [motionAllowed, setMotionAllowed] = useState(true)
 
   useEffect(() => {
@@ -76,13 +69,11 @@ export default function Hero() {
     motionAllowed,
   )
 
-  // Wait for the one-time loader on a first visit; start immediately
-  // on every return visit (where the loader is skipped entirely).
-  const delay = useEntranceDelay(0.1, 1.85)
+  const delay = useEntranceDelay(0.05, 0.25)
   const container = useMemo(
     () => ({
       hidden: {},
-      visible: { transition: { staggerChildren: 0.1, delayChildren: delay } },
+      visible: { transition: { staggerChildren: 0.08, delayChildren: delay } },
     }),
     [delay],
   )
@@ -93,39 +84,43 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-end overflow-hidden pb-16 pt-24"
+      className="relative flex min-h-[92vh] items-center justify-center overflow-hidden pb-16 pt-28 lg:pt-36"
     >
-      {/* Custom illustrations near the hero */}
-      <HeroIllustrations />
-
-      {/* Full-width container — touches screen edges */}
-      <div className="relative z-10 w-full px-6 sm:px-8 lg:px-16">
-        <motion.div variants={container} initial="hidden" animate="visible">
-          {/* Mono intro line */}
-          <motion.p variants={item} className="mb-6 font-mono text-sm text-muted">
-            <span className="text-accent">$</span> build --name {site.shortName} --role fullstack
-          </motion.p>
-
-          {/* Oversized, left-aligned display name — the visual anchor */}
-          <motion.h1
-            variants={item}
-            className="font-display leading-[0.85] text-text"
-            style={{
-              fontSize: 'clamp(3.5rem, 1.5rem + 8vw, 17rem)',
-              overflowWrap: 'anywhere',
-            }}
-          >
-            {first}
-            <span className="block text-accent">{lastName}</span>
-          </motion.h1>
-
+      <div className="relative z-10 w-full max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Main Info Column */}
           <motion.div
-            variants={item}
-            className="mt-10 flex max-w-xl flex-col gap-8 sm:flex-row sm:items-end sm:justify-between sm:gap-6"
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7"
           >
+            {/* Status Pill */}
+            <motion.div variants={item} className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 font-mono text-xs text-accent backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+              </span>
+              <span>Available for freelance &amp; full-time work</span>
+            </motion.div>
+
+            {/* Display Headline */}
+            <motion.h1
+              variants={item}
+              className="font-display text-5xl font-extrabold tracking-tight text-text sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05]"
+            >
+              {first}{' '}
+              <span className="bg-gradient-to-r from-accent via-emerald-400 to-teal-300 bg-clip-text text-transparent">
+                {lastName}
+              </span>
+            </motion.h1>
+
             {/* Role (typewriter) */}
-            <div className="flex items-center gap-3 font-mono text-lg text-soft sm:text-xl">
-              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
+            <motion.div
+              variants={item}
+              className="mt-6 flex items-center gap-2.5 font-mono text-lg text-soft sm:text-xl"
+            >
+              <span className="text-accent font-bold">&gt;</span>
               <span>
                 {typed}
                 <motion.span
@@ -134,56 +129,80 @@ export default function Hero() {
                   transition={{ duration: 0.8, repeat: Infinity }}
                 />
               </span>
-            </div>
+            </motion.div>
+
+            {/* Value Proposition */}
+            <motion.p
+              variants={item}
+              className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+            >
+              {site.intro}
+            </motion.p>
+
+            {/* Quick Tech Badges */}
+            <motion.div variants={item} className="mt-6 flex flex-wrap items-center gap-2 font-mono text-xs text-soft">
+              <span className="rounded-md border border-white/10 bg-surface/80 px-2.5 py-1">Next.js 15</span>
+              <span className="rounded-md border border-white/10 bg-surface/80 px-2.5 py-1">Node.js &amp; Express</span>
+              <span className="rounded-md border border-white/10 bg-surface/80 px-2.5 py-1">PostgreSQL</span>
+              <span className="rounded-md border border-white/10 bg-surface/80 px-2.5 py-1">Tailwind CSS</span>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/contact"
+                  className="group flex items-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-mono text-sm font-semibold text-black transition-all duration-300 shadow-[0_0_25px_rgba(16,185,129,0.25)] hover:shadow-[0_0_35px_rgba(16,185,129,0.45)] hover:brightness-110"
+                >
+                  let&apos;s talk
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/projects"
+                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-surface/60 px-6 py-3.5 font-mono text-sm text-text backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:text-accent hover:bg-surface"
+                >
+                  view work
+                </Link>
+              </motion.div>
+              {/* Plain <a>, not <Link>: the résumé is a static PDF in
+                  /public, so the browser can download it directly. */}
+              <motion.a
+                href={site.cv}
+                download="Khaled-Waleed-CV.pdf"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-2 rounded-xl px-4 py-3.5 font-mono text-sm text-soft transition-colors duration-300 hover:text-accent"
+              >
+                <Download size={16} />
+                download cv
+              </motion.a>
+            </motion.div>
           </motion.div>
 
-          {/* Short intro */}
-          <motion.p
-            variants={item}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
-          >
-            {site.intro}
-          </motion.p>
-
-          {/* CTAs — outlined (accent border + text, no bg fill) */}
-          <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-4">
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/contact"
-                className="group flex items-center gap-2 border border-accent px-7 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent hover:text-background"
-              >
-                let&apos;s talk
-                <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <Link
-                href="/projects"
-                className="border border-surface-light px-7 py-3 font-mono text-sm text-text transition-colors hover:border-accent hover:text-accent"
-              >
-                view work
-              </Link>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+          {/* Right Column: Interactive Code Architecture Card */}
+          <div className="flex justify-center lg:col-span-5 lg:justify-end">
+            <HeroIllustrations />
+          </div>
+        </div>
       </div>
 
       {/* Scroll hint */}
       <motion.button
         onClick={scrollToNext}
         aria-label="Scroll down"
-        className="absolute right-8 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-1 text-muted transition-colors hover:text-accent lg:flex"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 font-mono text-xs text-muted/70 transition-colors hover:text-accent"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: delay + 1.1, duration: 0.8 }}
+        transition={{ delay: delay + 0.6, duration: 0.6 }}
       >
+        <span className="uppercase tracking-widest">scroll</span>
         <motion.span
-          className="flex flex-col items-center gap-1 text-xs uppercase tracking-widest"
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, 4, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          scroll
-          <ArrowDown size={18} />
+          <ArrowDown size={14} className="text-accent" />
         </motion.span>
       </motion.button>
     </section>

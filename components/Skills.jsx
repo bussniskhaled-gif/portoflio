@@ -148,14 +148,16 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
                   return (
                     <motion.li
                       key={item.name}
-                      className="flex items-center gap-3 border-t border-surface-light py-3 text-text"
+                      className="flex items-start gap-3 border-t border-surface-light py-3 text-text"
                       initial={{ opacity: 0, x: -12 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
                     >
+                      {/* Icon aligns with the title line, not the middle
+                          of the title + note block. */}
                       {Icon && (
-                        <Icon size={16} className="shrink-0 text-accent" />
+                        <Icon size={16} className="mt-1 shrink-0 text-accent" />
                       )}
                       <span className="min-w-0 flex-1">
                         <span className="text-lg font-medium">{item.name}</span>

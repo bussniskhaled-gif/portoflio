@@ -1,105 +1,119 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Terminal, Database, Server, CheckCircle2 } from 'lucide-react'
 import { useEntranceDelay } from '../hooks/useEntranceDelay'
 
-// Custom minimal illustration accents scattered near the hero.
-// Hand-drawn inline SVG line-art — deliberately NOT stock icons.
-// Only neon green #39FF14 + grays (per the strict palette).
-
-function MiniCodeEditor() {
-  return (
-    <motion.svg
-      width="150"
-      height="120"
-      viewBox="0 0 150 120"
-      fill="none"
-      className="overflow-visible"
-      aria-hidden="true"
-      animate={{ y: [0, -10, 0], rotate: [0, 1.5, 0] }}
-      transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <rect x="8" y="16" width="134" height="96" rx="10" stroke="rgba(232,232,232,0.28)" strokeWidth="1.5" fill="#1a1a1a" />
-      <circle cx="24" cy="32" r="3.5" fill="#39ff14" opacity="0.9" />
-      <circle cx="38" cy="32" r="3.5" fill="rgba(232,232,232,0.35)" />
-      <circle cx="52" cy="32" r="3.5" fill="rgba(232,232,232,0.35)" />
-      <path d="M22 52 H72" stroke="#39ff14" strokeWidth="5" strokeLinecap="round" opacity="0.9" />
-      <path d="M22 68 H58" stroke="rgba(232,232,232,0.45)" strokeWidth="5" strokeLinecap="round" />
-      <path d="M22 84 H96" stroke="rgba(232,232,232,0.45)" strokeWidth="5" strokeLinecap="round" />
-    </motion.svg>
-  )
-}
-
-function CursorArrow() {
-  return (
-    <motion.svg
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
-      fill="none"
-      className="overflow-visible"
-      aria-hidden="true"
-      animate={{ x: [0, 8, 0], y: [0, -6, 0], rotate: [-4, 2, -4] }}
-      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <path d="M20 12 L52 56 L38 50 L30 60 L24 44 L8 38 Z" fill="#39ff14" opacity="0.92" />
-      <path d="M20 12 L52 56" stroke="#0a0a0a" strokeWidth="2" />
-    </motion.svg>
-  )
-}
-
-function SparkleCluster() {
-  return (
-    <motion.svg
-      width="110"
-      height="110"
-      viewBox="0 0 110 110"
-      fill="none"
-      className="overflow-visible"
-      aria-hidden="true"
-      animate={{ rotate: [0, 12, 0], scale: [1, 1.08, 1] }}
-      transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <path d="M55 12 L62 46 L96 55 L62 64 L55 98 L48 64 L14 55 L48 46 Z" fill="#39ff14" opacity="0.2" />
-      <path d="M55 12 L62 46 L96 55 L62 64 L55 98 L48 64 L14 55 L48 46 Z" stroke="#39ff14" strokeWidth="1.5" />
-      <circle cx="90" cy="18" r="3" fill="#39ff14" opacity="0.6" />
-      <circle cx="16" cy="82" r="2.5" fill="rgba(232,232,232,0.5)" />
-    </motion.svg>
-  )
-}
-
 export default function HeroIllustrations() {
-  // Offsets relative to the hero entrance, which itself waits for the
-  // one-time loader. On return visits everything lands ~1s earlier.
-  const d = useEntranceDelay(0.6, 1.8)
+  const d = useEntranceDelay(0.1, 0.4)
 
   return (
-    <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
+    <div className="relative w-full max-w-lg lg:max-w-xl">
+      {/* Ambient background glow */}
+      <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-accent/20 via-emerald-500/10 to-teal-500/20 opacity-70 blur-2xl" />
+
+      {/* Main Glass IDE Terminal Window */}
       <motion.div
-        className="absolute right-[8%] top-[16%] hidden lg:block"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: d, duration: 0.8 }}
+        className="relative overflow-hidden rounded-2xl border border-white/10 bg-surface/90 shadow-2xl backdrop-blur-xl"
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: d + 0.15, duration: 0.7, ease: 'easeOut' }}
       >
-        <MiniCodeEditor />
+        {/* Window Chrome / Title bar */}
+        <div className="flex items-center justify-between border-b border-white/5 bg-background/50 px-4 py-3">
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-red-500/70" />
+            <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
+            <span className="h-3 w-3 rounded-full bg-green-500/70" />
+          </div>
+          <div className="flex items-center gap-1.5 rounded-md bg-white/[0.04] px-2.5 py-0.5 font-mono text-[11px] text-muted">
+            <Terminal size={12} className="text-accent" />
+            <span>architecture.ts</span>
+          </div>
+          <div className="flex items-center gap-1 font-mono text-[11px] text-accent/70">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+            <span>live</span>
+          </div>
+        </div>
+
+        {/* Code Content */}
+        <div className="p-5 font-mono text-xs leading-relaxed sm:text-[13px]">
+          <div className="text-muted/60">// Full Stack Architecture Config</div>
+          <div className="mt-2">
+            <span className="text-emerald-400">const</span>{' '}
+            <span className="text-text font-semibold">khaledWaleed</span>{' '}
+            <span className="text-accent">=</span> {'{'}
+          </div>
+
+          <div className="pl-4">
+            <span className="text-soft">role</span>:{' '}
+            <span className="text-amber-300">&apos;Full Stack Engineer&apos;</span>,
+          </div>
+
+          <div className="pl-4">
+            <span className="text-soft">specialties</span>: {'['}
+          </div>
+          <div className="pl-8 text-amber-200/90">
+            &apos;Next.js 15 &amp; React 19&apos;,<br />
+            &apos;Node.js &amp; Express APIs&apos;,<br />
+            &apos;PostgreSQL Schemas &amp; Queries&apos;,<br />
+            &apos;Interactive Framer Motion &amp; Tailwind&apos;
+          </div>
+          <div className="pl-4">{'],'}</div>
+
+          <div className="pl-4">
+            <span className="text-soft">principles</span>: {'['}
+          </div>
+          <div className="pl-8 text-emerald-300/80">
+            &apos;Pixel-perfect responsiveness&apos;,<br />
+            &apos;Bulletproof API validation&apos;,<br />
+            &apos;End-to-end product delivery&apos;
+          </div>
+          <div className="pl-4">{']'}</div>
+
+          <div className="mt-1">{'};'}</div>
+
+          {/* Terminal status line */}
+          <div className="mt-5 rounded-lg border border-white/5 bg-background/60 p-3">
+            <div className="flex items-center justify-between text-[11px] text-muted">
+              <span className="flex items-center gap-1.5 text-accent">
+                <CheckCircle2 size={13} /> All systems operational
+              </span>
+              <span className="text-muted/70">Next.js 15 · PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Floating Badges */}
+      <motion.div
+        className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-xl border border-white/10 bg-surface/95 px-3.5 py-2 shadow-xl backdrop-blur-md"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: d + 0.35, duration: 0.6 }}
+      >
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/15 text-accent">
+          <Database size={15} />
+        </div>
+        <div className="text-[11px]">
+          <p className="font-semibold text-text">PostgreSQL</p>
+          <p className="font-mono text-muted text-[10px]">Optimized Schemas</p>
+        </div>
       </motion.div>
 
       <motion.div
-        className="absolute right-[24%] bottom-[20%] hidden lg:block"
-        initial={{ opacity: 0, scale: 0.6 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: d + 0.4, duration: 0.7 }}
+        className="absolute -top-4 -right-3 flex items-center gap-2 rounded-xl border border-white/10 bg-surface/95 px-3.5 py-2 shadow-xl backdrop-blur-md"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: d + 0.45, duration: 0.6 }}
       >
-        <CursorArrow />
-      </motion.div>
-
-      <motion.div
-        className="absolute left-[3%] bottom-[18%] hidden md:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: d + 0.6, duration: 0.8 }}
-      >
-        <SparkleCluster />
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/15 text-accent">
+          <Server size={15} />
+        </div>
+        <div className="text-[11px]">
+          <p className="font-semibold text-text">Node.js API</p>
+          <p className="font-mono text-muted text-[10px]">REST &amp; Auth Ready</p>
+        </div>
       </motion.div>
     </div>
   )

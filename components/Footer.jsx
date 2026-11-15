@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowUp, ArrowUpRight } from 'lucide-react'
+import { ArrowUp, ArrowUpRight, Download } from 'lucide-react'
 import site, { navRoutes } from '../data/site'
 
 const socialLinks = [
@@ -75,6 +75,19 @@ export default function Footer() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={site.cv}
+                download="Khaled-Waleed-CV.pdf"
+                className="group flex items-center gap-1.5 font-mono text-sm text-soft transition-colors hover:text-accent"
+              >
+                Download CV
+                <Download
+                  size={14}
+                  className="text-muted transition-colors group-hover:text-accent"
+                />
+              </a>
+            </li>
             <li>
               <a
                 href={`mailto:${site.email}`}
