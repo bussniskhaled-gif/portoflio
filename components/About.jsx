@@ -22,7 +22,7 @@ export default function About({ detailed = true }) {
   const [rightRef, rightIn] = useReveal({ amount: 0.25 })
 
   return (
-    <section id="about" aria-label="About" className="w-full border-t border-surface-light">
+    <section id="about" aria-label="About" className="w-full overflow-hidden border-t border-surface-light">
       <div className="w-full px-6 py-24 sm:px-8 lg:px-16">
         <div className="grid w-full gap-12 lg:grid-cols-[1.3fr_0.7fr]">
           {/* Story */}
