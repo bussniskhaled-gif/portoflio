@@ -1,17 +1,11 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 import {
-  FileCode2,
-  Code,
   MonitorSmartphone,
   Accessibility,
   Gauge,
-  Rocket,
-  Atom,
-  Wind,
   Sparkles,
-  GitBranch,
   Braces,
   Server,
   Zap,
@@ -23,55 +17,71 @@ import {
   Package,
   TestTube,
   SquareCode,
-} from 'lucide-react'
-import skills, { alsoComfortable, learning } from '../data/skills'
-import { useReveal } from '../hooks/useReveal'
+} from "lucide-react";
+import {
+  SiJavascript,
+  SiHtml5,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiFramer,
+  SiNodedotjs,
+  SiPostgresql,
+  SiGit,
+  SiGithub,
+  SiFigma,
+} from "react-icons/si";
+import skills, { alsoComfortable, learning } from "../data/skills";
+import TechStrip from "./TechStrip";
+import { useReveal } from "../hooks/useReveal";
 
+// Real brand marks for the ten core technologies; lucide handles the
+// concepts that have no logo (responsive design, accessibility, APIs).
 const iconMap = {
-  'JavaScript / TypeScript': FileCode2,
-  'HTML & CSS': Code,
-  'Responsive design': MonitorSmartphone,
-  'Accessibility & semantics': Accessibility,
-  'Performance budgets': Gauge,
-  'Next.js': Rocket,
-  React: Atom,
-  'Tailwind CSS': Wind,
-  'Framer Motion': Sparkles,
-  'Git & workflow': GitBranch,
-}
+  "JavaScript / TypeScript": SiJavascript,
+  "HTML & CSS": SiHtml5,
+  "Responsive design": MonitorSmartphone,
+  "Accessibility & semantics": Accessibility,
+  "Performance budgets": Gauge,
+  "Next.js": SiNextdotjs,
+  React: SiReact,
+  "Tailwind CSS": SiTailwindcss,
+  "Framer Motion": SiFramer,
+  "Node.js & Express": SiNodedotjs,
+  "SQL & data modeling": SiPostgresql,
+  PostgreSQL: SiPostgresql,
+  "REST API design": Network,
+  "Git & workflow": SiGit,
+  GitHub: SiGithub,
+  Figma: SiFigma,
+};
 
 const chipIcons = {
-  'Node.js route handlers': Server,
-  'Nodemailer & SMTP': Send,
-  'REST & GraphQL data fetching': Network,
+  "Node.js route handlers": Server,
+  "Nodemailer & SMTP": Send,
+  "REST & GraphQL data fetching": Network,
   Vite: Zap,
-  'Firebase Auth': Braces,
+  "Firebase Auth": Braces,
   Supabase: Triangle,
-  'Stripe checkout': Package,
-  'Sanity CMS': PenTool,
-  'Framer Motion gestures': Sparkles,
-  'Playwright smoke tests': TestTube,
+  "Stripe checkout": Package,
+  "Sanity CMS": PenTool,
+  "Framer Motion gestures": Sparkles,
+  "Playwright smoke tests": TestTube,
   Vitest: Bug,
-  'ESLint & Oxlint': SquareCode,
-}
+  "ESLint & Oxlint": SquareCode,
+};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-}
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
-// ============================================================
-// SKILLS
-// The original two-column split, upgraded with a one-line note and
-// a usage frequency per skill. `showHeading` lets the Home preview
-// reuse the same visual language at a smaller scale.
-// ============================================================
 export default function Skills({ showHeading = true, limit, viewAll }) {
-  const [headRef, headIn] = useReveal()
+  const [headRef, headIn] = useReveal();
 
   const categories = limit
     ? skills.map((cat) => ({ ...cat, items: cat.items.slice(0, limit) }))
-    : skills
+    : skills;
 
   return (
     <section
@@ -118,6 +128,8 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
           </div>
         )}
 
+        <TechStrip />
+
         {/* Two categories — full-width split */}
         <div className="grid w-full border-t border-surface-light md:grid-cols-2">
           {categories.map((cat) => (
@@ -129,8 +141,8 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
               viewport={{ once: true, amount: 0.2 }}
               className={`group flex flex-col py-10 md:py-14 md:px-8 ${
                 limit
-                  ? 'first:border-b first:border-surface-light md:border-b-0 md:pr-12 last:md:border-l last:md:border-surface-light'
-                  : 'first:md:pr-12 last:md:border-l last:md:border-surface-light'
+                  ? "first:border-b first:border-surface-light md:border-b-0 md:pr-12 last:md:border-l last:md:border-surface-light"
+                  : "first:md:pr-12 last:md:border-l last:md:border-surface-light"
               }`}
             >
               <div className="mb-2 flex items-baseline justify-between gap-4">
@@ -138,13 +150,13 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
                   {cat.title}
                 </h3>
                 <span className="font-mono text-xs text-accent">
-                  {cat.id === 'foundation' ? '01' : '02'}
+                  {cat.id === "foundation" ? "01" : "02"}
                 </span>
               </div>
               <p className="mb-8 max-w-md text-muted">{cat.tagline}</p>
               <ul className="flex flex-col">
                 {cat.items.map((item, i) => {
-                  const Icon = iconMap[item.name]
+                  const Icon = iconMap[item.name];
                   return (
                     <motion.li
                       key={item.name}
@@ -173,7 +185,7 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
                         </span>
                       )}
                     </motion.li>
-                  )
+                  );
                 })}
               </ul>
             </motion.article>
@@ -188,7 +200,7 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
               <p className="eyebrow mb-6">// also comfortable with</p>
               <div className="flex w-full flex-wrap gap-3">
                 {alsoComfortable.map((tool, i) => {
-                  const Icon = chipIcons[tool]
+                  const Icon = chipIcons[tool];
                   return (
                     <motion.span
                       key={tool}
@@ -196,12 +208,18 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
                       initial={{ opacity: 0, scale: 0.92 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: i * 0.03, ease: 'easeOut' }}
+                      transition={{
+                        duration: 0.3,
+                        delay: i * 0.03,
+                        ease: "easeOut",
+                      }}
                     >
-                      {Icon && <Icon size={15} className="shrink-0 text-accent" />}
+                      {Icon && (
+                        <Icon size={15} className="shrink-0 text-accent" />
+                      )}
                       {tool}
                     </motion.span>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -220,7 +238,9 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
                     transition={{ duration: 0.45, delay: i * 0.06 }}
                   >
                     <h4 className="font-display text-xl text-text">{l.name}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{l.note}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                      {l.note}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -229,5 +249,5 @@ export default function Skills({ showHeading = true, limit, viewAll }) {
         )}
       </div>
     </section>
-  )
+  );
 }

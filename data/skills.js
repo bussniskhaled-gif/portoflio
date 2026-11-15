@@ -79,9 +79,19 @@ const skills = [
         note: 'Variant-driven choreography, layout animations, and route transitions.',
       },
       {
+        name: 'Figma',
+        depth: 'Regularly',
+        note: 'Reading design files, exporting assets, and matching spacing, type, and states exactly.',
+      },
+      {
         name: 'Git & workflow',
         depth: 'Every day',
         note: 'Small branches, real commit messages, review-friendly PRs, preview deploys.',
+      },
+      {
+        name: 'GitHub',
+        depth: 'Every day',
+        note: 'Pull requests, code review, issues, and a green contribution history.',
       },
     ],
   },

@@ -28,7 +28,7 @@ const site = {
   typingPause: 1600,
 
   social: {
-    github: 'https://github.com/ka6246770',
+    github: 'https://github.com/bussniskhaled-gif',
     linkedin: 'https://linkedin.com/in/khaledwaleed',
     twitter: 'https://twitter.com/khaledwaleed',
   },

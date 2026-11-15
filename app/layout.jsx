@@ -2,12 +2,22 @@ import './globals.css'
 import { MotionConfig } from 'framer-motion'
 import site from '../data/site'
 import skills from '../data/skills'
+import techStack from '../data/techStack'
 
 // Canonical URL — override with NEXT_PUBLIC_SITE_URL at build/run time.
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || site.url).replace(/\/+$/, '')
 
 const description =
   'Khaled Waleed is a full stack developer building complete web products with React, Next.js, Node.js, Express, and PostgreSQL — interface, API, and database. Available for freelance work.'
+
+// One deduplicated list used by the Person schema and the page keywords,
+// so every search engine and AI assistant sees the same skills.
+const allSkills = Array.from(
+  new Set([
+    ...techStack.map((tech) => tech.name),
+    ...skills.flatMap((cat) => cat.items.map((item) => item.name)),
+  ]),
+)
 
 // Person + WebSite ship on every page — they describe the site owner and
 // the site itself. FAQPage is deliberately NOT here: the visible FAQ only
@@ -17,14 +27,25 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${SITE_URL}/#person`,
     name: site.name,
     url: SITE_URL,
     jobTitle: 'Full Stack Developer',
     description: site.intro,
     email: `mailto:${site.email}`,
     telephone: site.phoneIntl,
+    knowsLanguage: ['English', 'Arabic'],
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'EG',
+    },
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: 'Full Stack Developer',
+      skills: techStack.map((tech) => tech.name).join(', '),
+    },
     sameAs: [site.social.github, site.social.linkedin, site.social.twitter],
-    knowsAbout: skills.flatMap((cat) => cat.items.map((item) => item.name)),
+    knowsAbout: allSkills,
     subjectOf: [
       {
         '@type': 'WebSite',
@@ -37,10 +58,13 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
     name: `${site.name} — Portfolio`,
     url: SITE_URL,
     description,
     inLanguage: 'en',
+    publisher: { '@id': `${SITE_URL}/#person` },
+    about: { '@id': `${SITE_URL}/#person` },
   },
 ]
 
@@ -59,17 +83,25 @@ export const metadata = {
     'full stack developer',
     'frontend developer',
     'backend developer',
-    'Node.js developer',
-    'Express',
-    'PostgreSQL',
-    'Next.js developer',
     'React developer',
+    'Next.js developer',
+    'Node.js developer',
+    'PostgreSQL developer',
     'JavaScript',
     'TypeScript',
+    'HTML5',
+    'CSS3',
     'Tailwind CSS',
     'Framer Motion',
+    'Git',
+    'GitHub',
+    'Figma',
+    'REST API',
     'web developer portfolio',
     'freelance full stack developer',
+    'hire full stack developer',
+    'full stack developer Egypt',
+    'remote web developer',
   ],
   authors: [{ name: site.name, url: SITE_URL }],
   creator: site.name,
@@ -115,6 +147,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        {/* Machine-readable summary for AI search engines (GEO). */}
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms.txt"
+          title="LLM-readable site summary"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

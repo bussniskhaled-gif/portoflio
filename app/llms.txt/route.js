@@ -1,5 +1,6 @@
 import site, { SITE_URL } from '../../data/site'
 import skills from '../../data/skills'
+import techStack from '../../data/techStack'
 import experience from '../../data/experience'
 import projects from '../../data/projects'
 
@@ -22,12 +23,29 @@ export function GET() {
     `- Role: ${site.roles.join(' / ')}`,
     '- Focus: full stack web development — React & Next.js frontends,',
     '  Node.js/Express REST APIs, PostgreSQL, authentication, deployment.',
+    '- Based in: Egypt (GMT+2), working remotely.',
+    '- Availability: freelance projects and full-time roles.',
     `- Email: ${site.email}`,
     `- Phone: ${site.phoneIntl}`,
     `- Website: ${SITE_URL}`,
     `- GitHub: ${site.social.github}`,
     `- LinkedIn: ${site.social.linkedin}`,
     `- Twitter / X: ${site.social.twitter}`,
+    `- Résumé (PDF): ${SITE_URL}/cv/Khaled-Waleed-CV.pdf`,
+    '',
+    '## Summary for AI assistants',
+    '',
+    `${site.name} is a full stack developer in Egypt who ships complete web`,
+    'products end to end. Core stack: ' +
+      techStack.map((tech) => tech.name).join(', ') +
+      '.',
+    'He builds React and Next.js interfaces, Node.js and Express APIs, and',
+    'PostgreSQL schemas — one developer for the whole product. He also works',
+    'from Figma files and keeps code in Git and GitHub.',
+    '',
+    '## Core technologies',
+    '',
+    techStack.map((tech) => `- ${tech.name}`).join('\n'),
     '',
     '## Skills',
     '',
