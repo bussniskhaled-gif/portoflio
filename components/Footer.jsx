@@ -1,38 +1,41 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ArrowUp, ArrowUpRight, Download } from 'lucide-react'
-import site, { navRoutes } from '../data/site'
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowUp, ArrowUpRight, Download } from "lucide-react";
+import site, { navRoutes } from "../data/site";
 
 const socialLinks = [
-  { label: 'GitHub', href: site.social.github },
-  { label: 'LinkedIn', href: site.social.linkedin },
-  { label: 'Twitter', href: site.social.twitter },
-]
+  { label: "GitHub", href: site.social.github },
+  { label: "LinkedIn", href: site.social.linkedin },
+  { label: "Twitter", href: site.social.twitter },
+];
 
 // Full-width footer: page navigation + contact column + back to top.
 export default function Footer() {
   // Rendered empty on the server + first client pass so the year is set
   // only in an effect — avoids an SSR/client hydration mismatch.
-  const [year, setYear] = useState('')
+  const [year, setYear] = useState("");
 
   useEffect(() => {
-    setYear(String(new Date().getFullYear()))
-  }, [])
+    setYear(String(new Date().getFullYear()));
+  }, []);
 
   return (
     <footer className="w-full border-t border-surface-light">
       {/* Navigation columns */}
       <div className="grid w-full gap-10 border-b border-surface-light px-6 py-14 sm:px-8 md:grid-cols-3 lg:px-16">
         <div className="min-w-0">
-          <Link href="/" className="flex items-center font-display text-2xl text-text">
+          <Link
+            href="/"
+            className="flex items-center font-display text-2xl text-text"
+          >
             {site.shortName}
             <span className="text-accent">_</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-            {site.roles.join(' · ')}
+            {site.roles.join(" · ")}
           </p>
         </div>
 
@@ -109,12 +112,12 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-accent">// </span>
-          © {year} {site.name}. Built with Next.js &amp; Framer Motion.
+          <span className="text-accent">// </span>© {year} {site.name}. Built
+          with react.js &amp; Framer Motion.
         </motion.p>
 
         <motion.button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Back to top"
           className="flex items-center gap-2 border border-surface-light px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent hover:text-accent"
           initial={{ opacity: 0, y: 10 }}
@@ -126,5 +129,5 @@ export default function Footer() {
         </motion.button>
       </div>
     </footer>
-  )
+  );
 }

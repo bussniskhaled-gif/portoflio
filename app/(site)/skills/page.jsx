@@ -8,13 +8,11 @@ import techStack from '../../../data/techStack'
 export const metadata = {
   title: 'Skills — The stack I work in',
   description:
-    'React, Next.js, JavaScript and TypeScript, HTML5, CSS3, Tailwind CSS, Node.js, PostgreSQL, Git, GitHub, and Figma — with how each one is actually used.',
+    'React, JavaScript, HTML5, CSS3, Tailwind CSS, Node.js, PostgreSQL, Git, GitHub, and Figma — with how each one is actually used.',
   keywords: [
     'Khaled Waleed skills',
     'React developer',
-    'Next.js developer',
     'JavaScript developer',
-    'TypeScript',
     'HTML5',
     'CSS3',
     'Tailwind CSS',
@@ -30,7 +28,7 @@ export const metadata = {
     url: `${SITE_URL}/skills`,
     title: 'Skills — Khaled Waleed',
     description:
-      'React, Next.js, JavaScript, HTML5, CSS3, Tailwind CSS, Node.js, PostgreSQL, Git, GitHub, and Figma — the stack behind every product I ship.',
+      'React, JavaScript, HTML5, CSS3, Tailwind CSS, Node.js, PostgreSQL, Git, GitHub, and Figma — the stack behind every product I ship.',
   },
 }
 
@@ -62,7 +60,7 @@ export default function SkillsPage() {
         lead="Two buckets, stated honestly: the fundamentals underneath every interface, and the toolkit I open each day. No invented proficiency bars — just how often and on what."
         meta={[
           { label: 'core languages', value: 'JS · TS · HTML · CSS' },
-          { label: 'framework', value: 'React & Next.js' },
+          { label: 'framework', value: 'React' },
           { label: 'also fluent in', value: '12 supporting tools' },
         ]}
       />

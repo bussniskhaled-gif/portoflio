@@ -1,19 +1,7 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
-// ============================================================
-// PAGE HEADER
-// The dedicated hero for every routed page. Same language as the
-// Home hero (mono path, oversized display title, one accent phrase)
-// but scaled to a page rather than a full fold.
-//
-//   ~/services                          <- mono route path, the site's "//" voice
-//   Services                            <- display h1 (accent tail)
-//   lead paragraph                      <- what this page is for
-//                       [meta rail]     <- 2–4 key/value facts, right aligned
-//   ───────────────────────────────────  <- accent hairline drawn left → right
-// ============================================================
 export default function PageHeader({ path, title, accent, lead, meta = [] }) {
   return (
     <header className="relative w-full overflow-hidden border-b border-surface-light">
@@ -34,7 +22,7 @@ export default function PageHeader({ path, title, accent, lead, meta = [] }) {
               className="text-display font-display text-text"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
+              transition={{ duration: 0.6, delay: 0.12, ease: "easeOut" }}
             >
               {title}
               {accent && <span className="text-accent"> {accent}</span>}
@@ -64,7 +52,7 @@ export default function PageHeader({ path, title, accent, lead, meta = [] }) {
                 <div
                   key={item.label}
                   className={`min-w-0 lg:w-full lg:border-surface-light ${
-                    i === 0 ? '' : 'lg:border-t'
+                    i === 0 ? "" : "lg:border-t"
                   } lg:py-3`}
                 >
                   <dt className="font-mono text-xs uppercase tracking-widest text-muted">
@@ -86,8 +74,8 @@ export default function PageHeader({ path, title, accent, lead, meta = [] }) {
         aria-hidden="true"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
       />
     </header>
-  )
+  );
 }

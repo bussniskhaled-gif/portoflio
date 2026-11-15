@@ -12,9 +12,9 @@ const skills = [
     tagline: 'The core skills underneath every product I ship, front and back.',
     items: [
       {
-        name: 'JavaScript / TypeScript',
+        name: 'JavaScript',
         depth: 'Every day',
-        note: 'ES2023+ on both sides of the stack, with TypeScript where types catch mistakes before runtime.',
+        note: 'ES2023+ on both sides of the stack — modern syntax, modules, and async patterns used daily.',
       },
       {
         name: 'SQL & data modeling',
@@ -48,11 +48,6 @@ const skills = [
     title: 'Toolkit',
     tagline: 'The stack I reach for to build complete products, database to interface.',
     items: [
-      {
-        name: 'Next.js',
-        depth: 'Every day',
-        note: 'App Router, server components, route handlers, metadata, and ISR.',
-      },
       {
         name: 'Node.js & Express',
         depth: 'Every day',
@@ -119,7 +114,7 @@ export const learning = [
   { name: 'React Server Components patterns', note: 'Pushing more work to the server without losing interactivity.' },
   { name: 'Query tuning & indexing', note: 'Reading query plans so PostgreSQL stays fast as tables grow.' },
   { name: 'API testing', note: 'Automated tests around endpoints so refactors do not break clients.' },
-  { name: 'TypeScript generics', note: 'Typing component APIs so misuse is impossible.' },
+  { name: 'Component API design', note: 'Designing props and variants so misuse is impossible.' },
 ]
 
 export default skills

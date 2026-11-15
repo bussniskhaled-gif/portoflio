@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Terminal, Database, Server, CheckCircle2 } from 'lucide-react'
-import { useEntranceDelay } from '../hooks/useEntranceDelay'
+import { motion } from "framer-motion";
+import { Terminal, Database, Server, CheckCircle2 } from "lucide-react";
+import { useEntranceDelay } from "../hooks/useEntranceDelay";
 
 export default function HeroIllustrations() {
-  const d = useEntranceDelay(0.1, 0.4)
+  const d = useEntranceDelay(0.1, 0.4);
 
   return (
     <div className="relative w-full max-w-lg lg:max-w-xl">
@@ -17,7 +17,7 @@ export default function HeroIllustrations() {
         className="relative overflow-hidden rounded-2xl border border-white/10 bg-surface/90 shadow-2xl backdrop-blur-xl"
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: d + 0.15, duration: 0.7, ease: 'easeOut' }}
+        transition={{ delay: d + 0.15, duration: 0.7, ease: "easeOut" }}
       >
         {/* Window Chrome / Title bar */}
         <div className="flex items-center justify-between border-b border-white/5 bg-background/50 px-4 py-3">
@@ -40,38 +40,46 @@ export default function HeroIllustrations() {
         <div className="p-5 font-mono text-xs leading-relaxed sm:text-[13px]">
           <div className="text-muted/60">// Full Stack Architecture Config</div>
           <div className="mt-2">
-            <span className="text-emerald-400">const</span>{' '}
-            <span className="text-text font-semibold">khaledWaleed</span>{' '}
-            <span className="text-accent">=</span> {'{'}
+            <span className="text-emerald-400">const</span>{" "}
+            <span className="text-text font-semibold">khaledWaleed</span>{" "}
+            <span className="text-accent">=</span> {"{"}
           </div>
 
           <div className="pl-4">
-            <span className="text-soft">role</span>:{' '}
-            <span className="text-amber-300">&apos;Full Stack Engineer&apos;</span>,
+            <span className="text-soft">role</span>:{" "}
+            <span className="text-amber-300">
+              &apos;Full Stack Engineer&apos;
+            </span>
+            ,
           </div>
 
           <div className="pl-4">
-            <span className="text-soft">specialties</span>: {'['}
+            <span className="text-soft">specialties</span>: {"["}
           </div>
           <div className="pl-8 text-amber-200/90">
-            &apos;Next.js 15 &amp; React 19&apos;,<br />
-            &apos;Node.js &amp; Express APIs&apos;,<br />
-            &apos;PostgreSQL Schemas &amp; Queries&apos;,<br />
+            &apos;react.js 15 &amp; React 19&apos;,
+            <br />
+            &apos;Node.js &amp; Express APIs&apos;,
+            <br />
+            &apos;PostgreSQL Schemas &amp; Queries&apos;,
+            <br />
             &apos;Interactive Framer Motion &amp; Tailwind&apos;
           </div>
-          <div className="pl-4">{'],'}</div>
+          <div className="pl-4">{"],"}</div>
 
           <div className="pl-4">
-            <span className="text-soft">principles</span>: {'['}
+            <span className="text-soft">principles</span>: {"["}
           </div>
           <div className="pl-8 text-emerald-300/80">
-            &apos;Pixel-perfect responsiveness&apos;,<br />
-            &apos;Bulletproof API validation&apos;,<br />
+            &apos;Pixel-perfect responsiveness&apos;,
+            <br />
+            &apos;Bulletproof API validation&apos;,
+            <br />
             &apos;End-to-end product delivery&apos;
           </div>
-          <div className="pl-4">{']'}</div>
+          <div className="pl-4">{"]"}</div>
 
-          <div className="mt-1">{'};'}</div>
+          <div className="mt-1">{"};"}</div>
 
           {/* Terminal status line */}
           <div className="mt-5 rounded-lg border border-white/5 bg-background/60 p-3">
@@ -79,7 +87,7 @@ export default function HeroIllustrations() {
               <span className="flex items-center gap-1.5 text-accent">
                 <CheckCircle2 size={13} /> All systems operational
               </span>
-              <span className="text-muted/70">Next.js 15 · PostgreSQL</span>
+              <span className="text-muted/70">.react 15 · PostgreSQL</span>
             </div>
           </div>
         </div>
@@ -112,9 +120,11 @@ export default function HeroIllustrations() {
         </div>
         <div className="text-[11px]">
           <p className="font-semibold text-text">Node.js API</p>
-          <p className="font-mono text-muted text-[10px]">REST &amp; Auth Ready</p>
+          <p className="font-mono text-muted text-[10px]">
+            REST &amp; Auth Ready
+          </p>
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

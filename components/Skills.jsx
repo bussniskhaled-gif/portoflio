@@ -21,7 +21,6 @@ import {
 import {
   SiJavascript,
   SiHtml5,
-  SiNextdotjs,
   SiReact,
   SiTailwindcss,
   SiFramer,
@@ -38,12 +37,11 @@ import { useReveal } from "../hooks/useReveal";
 // Real brand marks for the ten core technologies; lucide handles the
 // concepts that have no logo (responsive design, accessibility, APIs).
 const iconMap = {
-  "JavaScript / TypeScript": SiJavascript,
+  JavaScript: SiJavascript,
   "HTML & CSS": SiHtml5,
   "Responsive design": MonitorSmartphone,
   "Accessibility & semantics": Accessibility,
   "Performance budgets": Gauge,
-  "Next.js": SiNextdotjs,
   React: SiReact,
   "Tailwind CSS": SiTailwindcss,
   "Framer Motion": SiFramer,

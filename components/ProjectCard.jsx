@@ -1,19 +1,28 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { ExternalLink, ArrowUpRight, Check, Atom, Wind, Zap, Code, Rocket, Sparkles } from 'lucide-react'
-import ProjectImageSlider from './ProjectImageSlider'
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  ExternalLink,
+  ArrowUpRight,
+  Check,
+  Atom,
+  Wind,
+  Zap,
+  Code,
+  Rocket,
+  Sparkles,
+} from "lucide-react";
+import ProjectImageSlider from "./ProjectImageSlider";
 
 const techIcons = {
   React: Atom,
   Tailwind: Wind,
   Vite: Zap,
   CSS: Code,
-  'Next.js': Rocket,
-  'Framer Motion': Sparkles,
-}
+  "Framer Motion": Sparkles,
+};
 
 // ============================================================
 // PROJECT CARD
@@ -23,7 +32,10 @@ const techIcons = {
 // ============================================================
 export default function ProjectCard({ project, detailed = false }) {
   return (
-    <motion.article id={String(project.id)} className="group w-full min-w-0 scroll-mt-28">
+    <motion.article
+      id={String(project.id)}
+      className="group w-full min-w-0 scroll-mt-28"
+    >
       {/* Full-bleed image — single screenshot, or a draggable slider when multiple images exist */}
       <div className="relative w-full overflow-hidden bg-surface">
         {project.images && project.images.length > 1 ? (
@@ -38,7 +50,11 @@ export default function ProjectCard({ project, detailed = false }) {
               src={project.screenshot}
               alt={project.title}
               fill
-              sizes={detailed ? '(max-width: 768px) 100vw, 60vw' : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'}
+              sizes={
+                detailed
+                  ? "(max-width: 768px) 100vw, 60vw"
+                  : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              }
               priority={false}
               className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
             />
@@ -61,21 +77,31 @@ export default function ProjectCard({ project, detailed = false }) {
             {detailed ? (
               project.title
             ) : (
-              <Link href={`/projects#${project.id}`} className="focus-visible:outline-none">
+              <Link
+                href={`/projects#${project.id}`}
+                className="focus-visible:outline-none"
+              >
                 {project.title}
               </Link>
             )}
           </h3>
-          <p className="mt-3 text-base leading-relaxed text-muted">{project.description}</p>
+          <p className="mt-3 text-base leading-relaxed text-muted">
+            {project.description}
+          </p>
 
           {detailed && project.detail && (
-            <p className="mt-4 text-base leading-relaxed text-soft">{project.detail}</p>
+            <p className="mt-4 text-base leading-relaxed text-soft">
+              {project.detail}
+            </p>
           )}
 
           {detailed && project.highlights && (
             <ul className="mt-5 flex flex-col gap-2.5">
               {project.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-2.5 text-sm leading-relaxed text-muted">
+                <li
+                  key={h}
+                  className="flex items-start gap-2.5 text-sm leading-relaxed text-muted"
+                >
                   <Check size={15} className="mt-0.5 shrink-0 text-accent" />
                   <span className="min-w-0">{h}</span>
                 </li>
@@ -104,7 +130,7 @@ export default function ProjectCard({ project, detailed = false }) {
         <div className="flex w-full flex-col items-start gap-6">
           <div className="flex flex-wrap gap-2">
             {project.tech.map((t) => {
-              const Icon = techIcons[t]
+              const Icon = techIcons[t];
               return (
                 <span
                   key={t}
@@ -113,7 +139,7 @@ export default function ProjectCard({ project, detailed = false }) {
                   {Icon && <Icon size={13} className="shrink-0 text-accent" />}
                   {t}
                 </span>
-              )
+              );
             })}
           </div>
 
@@ -142,5 +168,5 @@ export default function ProjectCard({ project, detailed = false }) {
         </div>
       </div>
     </motion.article>
-  )
+  );
 }
